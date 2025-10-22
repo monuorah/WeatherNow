@@ -23,20 +23,24 @@ enum WeatherType: String, Codable, CaseIterable {
     }
     
     // Maps Open-Meteo weather codes to our weather types
+    // WMO Weather interpretation codes (WW)
     static func from(weatherCode: Int) -> WeatherType {
         switch weatherCode {
-        // Clear sky
-        case 0, 1:
+        // Clear sky (0), Mainly clear (1), Partly cloudy (2), Overcast (3)
+        case 0, 1, 2, 3:
             return .sunny
-        // Fog
+        // Fog (45, 48)
         case 45, 48:
             return .foggy
-        // Rain codes (drizzle, rain, freezing rain)
-        case 51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82:
+        // Rain codes: Drizzle (51, 53, 55), Freezing Drizzle (56, 57),
+        // Rain (61, 63, 65), Freezing Rain (66, 67), Rain showers (80, 81, 82)
+        // Thunderstorm (95), Thunderstorm with hail (96, 99)
+        case 51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99:
             return .rainy
-        // Snow codes
+        // Snow codes: Snow fall (71, 73, 75), Snow grains (77), Snow showers (85, 86)
         case 71, 73, 75, 77, 85, 86:
             return .snowy
+        // Default to sunny for any unknown codes
         default:
             return .sunny
         }
@@ -96,6 +100,6 @@ struct WeatherData: Identifiable {
     }
     
     var precipitationString: String {
-        return String(format: "Rain: %.0f%%", precipitation)
+        return String(format: "Precipitation: %.1f mm", precipitation)
     }
 }
