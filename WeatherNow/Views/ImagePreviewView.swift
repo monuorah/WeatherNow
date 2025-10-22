@@ -1,6 +1,6 @@
 //
 //  ImagePreviewView.swift
-//  PhotoLibrary
+//  WeatherNow
 //
 //  Created by Mert on 10/14/25.
 //

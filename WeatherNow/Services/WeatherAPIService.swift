@@ -1,6 +1,6 @@
 //
 //  WeatherAPIService.swift
-//  PhotoLibrary
+//  WeatherNow
 //
 //  Created by Muna Onuorah on 10/19/25.
 //
