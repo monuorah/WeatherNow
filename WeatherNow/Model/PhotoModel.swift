@@ -12,11 +12,20 @@ import UIKit
 
 // MARK: - Photo Data Model
 struct Photo: Identifiable, Codable {
-    let id = UUID()
+    let id: UUID
     var imageData: Data
     var isFavorite: Bool = false
     var description: String = ""
     var dateAdded: Date = Date()
+    
+    // Initialize with a specific UUID (for loading from storage)
+    init(id: UUID = UUID(), imageData: Data, isFavorite: Bool = false, description: String = "", dateAdded: Date = Date()) {
+        self.id = id
+        self.imageData = imageData
+        self.isFavorite = isFavorite
+        self.description = description
+        self.dateAdded = dateAdded
+    }
     
     // Computed property converts Data back to UIImage for display
     // UIImage isn't Codable, so we store as Data and convert when needed

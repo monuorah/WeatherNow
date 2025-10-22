@@ -85,27 +85,28 @@ struct WeatherTypeCard: View {
     var body: some View {
         VStack(spacing: 10) {
             ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.gray.opacity(0.2))
-                    .frame(height: 150)
-                
                 if let photo = assignedPhoto, let image = photo.image {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 150)
+                        .frame(height: 120)
                         .clipped()
                         .cornerRadius(12)
                 } else {
-                    VStack(spacing: 10) {
-                        Image(systemName: weatherType.iconName)
-                            .font(.system(size: 40))
-                            .foregroundColor(.gray)
-                        
-                        Text("Tap to Set")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(height: 120)
+                        .overlay(
+                            VStack(spacing: 10) {
+                                Image(systemName: weatherType.iconName)
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.gray)
+                                
+                                Text("Tap to Set")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                        )
                 }
                 
                 if weatherSettings.hasPhoto(for: weatherType) {
